@@ -29,7 +29,7 @@
             <input type="password" id="password" placeholder="Password">
             <button class="btn-primary" id="auth-btn" onclick="submitAuth()">Log In</button>
             <p style="text-align: center; color: #94a3b8; margin-top: 10px; cursor: pointer; font-size: 14px;" onclick="toggleAuthMode()">
-                Don't have an account? <span style="color: #9b5de5; font-weight: bold;">Sign up</span>
+                Don't have an account? <span style="color: #6366f1; font-weight: bold;">Sign up</span>
             </p>
         </div>
     </div>
@@ -60,7 +60,7 @@
         </div>
 
         <div style="padding: 0 20px 10px 20px;">
-            <button class="btn-primary" style="width: 100%; background: #9b5de5; display: flex; justify-content: center; align-items: center; gap: 10px; box-shadow: 0 0 15px rgba(155, 93, 229, 0.3);" onclick="addNewContact()">
+            <button class="btn-primary" style="width: 100%; background: #6366f1; display: flex; justify-content: center; align-items: center; gap: 10px; box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);" onclick="addNewContact()">
                 <span style="font-size: 18px;">➕</span> Add New Contact
             </button>
         </div>
@@ -100,11 +100,11 @@
 
         <div class="chat-input-area">
             <input type="file" id="document-input" style="display: none;" onchange="uploadDocument(this)">
-            <button class="icon-btn" style="color: #9b5de5;" onclick="document.getElementById('document-input').click()">📎</button>
-            <button class="icon-btn" style="color: #9b5de5;" onclick="openLiveCamera()">📷</button>
-            <button class="icon-btn" id="voice-btn" style="color: #9b5de5;" onclick="toggleRecording()">🎤</button>
+            <button class="icon-btn" style="color: #6366f1;" onclick="document.getElementById('document-input').click()">📎</button>
+            <button class="icon-btn" style="color: #6366f1;" onclick="openLiveCamera()">📷</button>
+            <button class="icon-btn" id="voice-btn" style="color: #6366f1;" onclick="toggleRecording()">🎤</button>
             <input type="text" id="msg-input" placeholder="Message..." onkeypress="if(event.key === 'Enter') sendMessage()">
-            <button class="icon-btn" style="color: #9b5de5;" onclick="sendMessage()">➤</button>
+            <button class="icon-btn" style="color: #6366f1;" onclick="sendMessage()">➤</button>
         </div>
     </div>
 
@@ -123,14 +123,14 @@
             <button class="btn-primary" style="width: 100%; background: #3b82f6; box-shadow: 0 0 20px rgba(59,130,246,0.5);" onclick="closeSettings(); loadContacts()">My Contacts</button>
             <button class="btn-primary" style="width: 100%; background: #10b981; box-shadow: 0 0 20px rgba(16,185,129,0.5);" onclick="openAvatarOptions()">Change Profile Photo</button>
             <button class="btn-primary" style="width: 100%; background: #f59e0b; box-shadow: 0 0 20px rgba(245,158,11,0.5);" onclick="viewBlocked()">Blocked Contacts</button>
-            <button class="btn-primary" style="width: 100%; background: #9b5de5; box-shadow: 0 0 20px rgba(155, 93, 229, 0.5);" onclick="shareProfile()">Share Profile / Invite Friends</button>
+            <button class="btn-primary" style="width: 100%; background: #6366f1; box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);" onclick="shareProfile()">Share Profile / Invite Friends</button>
             <button class="btn-primary" style="width: 100%; background: #ef4444; box-shadow: 0 0 20px rgba(239,68,68,0.5);" onclick="logout()">Sign Out</button>
         </div>
     </div>
 
     <!-- CONTACT MENU MODAL -->
     <div id="contact-menu-modal" class="screen slide-right" style="background-color: rgba(0,0,0,0.7); z-index: 30; justify-content: flex-end; transition: opacity 0.3s;">
-        <div style="background-color: #1a1a2e; padding: 20px; border-top-left-radius: 20px; border-top-right-radius: 20px; display: flex; flex-direction: column; gap: 15px;">
+        <div style="background-color: #1e293b; padding: 20px; border-top-left-radius: 20px; border-top-right-radius: 20px; display: flex; flex-direction: column; gap: 15px;">
             <h3 id="contact-menu-name" style="text-align: center; margin-bottom: 10px; color: white;"></h3>
             <button class="btn-primary" style="background: #3b82f6;" onclick="editContact()">Edit Contact</button>
             <button class="btn-primary" style="background: #f59e0b;" onclick="blockContact()">Block User</button>
@@ -141,19 +141,19 @@
 
     <!-- PREVIEW MODAL -->
     <div id="preview-modal" class="screen slide-right" style="background-color: rgba(0,0,0,0.85); z-index: 50; justify-content: center; align-items: center;">
-        <div style="background-color: #1a1a2e; padding: 20px; border-radius: 20px; width: 90%; display: flex; flex-direction: column; gap: 15px;">
+        <div style="background-color: #1e293b; padding: 20px; border-radius: 20px; width: 90%; display: flex; flex-direction: column; gap: 15px;">
             <h3 id="preview-title" style="text-align: center; color: white;">Preview</h3>
             <div id="preview-content" style="display: flex; justify-content: center;"></div>
             <div style="display: flex; gap: 10px;">
                 <button class="btn-primary" style="flex: 1; background: #334155;" onclick="cancelPreview()">Discard</button>
-                <button class="btn-primary" style="flex: 1; background: #9b5de5;" onclick="sendPreview()">Send</button>
+                <button class="btn-primary" style="flex: 1; background: #6366f1;" onclick="sendPreview()">Send</button>
             </div>
         </div>
     </div>
 
     <!-- MESSAGE ACTION MODAL -->
     <div id="msg-action-modal" class="screen slide-right" style="background-color: rgba(0,0,0,0.7); z-index: 40; justify-content: flex-end;">
-        <div style="background-color: #1a1a2e; padding: 20px; border-top-left-radius: 20px; border-top-right-radius: 20px; display: flex; flex-direction: column; gap: 15px;">
+        <div style="background-color: #1e293b; padding: 20px; border-top-left-radius: 20px; border-top-right-radius: 20px; display: flex; flex-direction: column; gap: 15px;">
             <button class="btn-primary" id="msg-edit-btn" style="background: #3b82f6;" onclick="editMessage()">Edit Message</button>
             <button class="btn-primary" style="background: #f59e0b;" onclick="deleteMessage(false)">Delete for Me</button>
             <button class="btn-primary" style="background: #ef4444;" onclick="deleteMessage(true)">Delete for Everyone</button>
@@ -169,7 +169,7 @@
     </div>
 
     <!-- LIVE CAMERA MODAL -->
-    <div id="camera-modal" class="screen slide-right" style="background-color: #0b0c10; z-index: 55; justify-content: center; align-items: center;">
+    <div id="camera-modal" class="screen slide-right" style="background-color: #0f172a; z-index: 55; justify-content: center; align-items: center;">
         <div style="width: 100%; max-width: 500px; padding: 20px; display: flex; flex-direction: column; gap: 15px;">
             <div style="display: flex; justify-content: space-between; align-items: center;">
                 <h3 style="color: white;">Take Photo</h3>
@@ -178,7 +178,7 @@
             <div style="position: relative; width: 100%; aspect-ratio: 3/4; background: #000; border-radius: 20px; overflow: hidden;">
                 <video id="live-video" autoplay playsinline style="width: 100%; height: 100%; object-fit: cover;"></video>
             </div>
-            <button class="btn-primary" style="background: #9b5de5; padding: 20px; border-radius: 50px; width: 80px; height: 80px; align-self: center; margin-top: 20px; border: 4px solid white; box-shadow: 0 0 20px rgba(155, 93, 229, 0.5);" onclick="captureLivePhoto()"></button>
+            <button class="btn-primary" style="background: #6366f1; padding: 20px; border-radius: 50px; width: 80px; height: 80px; align-self: center; margin-top: 20px; border: 4px solid white; box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);" onclick="captureLivePhoto()"></button>
         </div>
         <canvas id="camera-canvas" style="display: none;"></canvas>
     </div>
@@ -188,7 +188,7 @@
         <div style="background-color: #1a1a2e; padding: 20px; border-top-left-radius: 20px; border-top-right-radius: 20px; display: flex; flex-direction: column; gap: 15px;">
             <button class="btn-primary" style="background: #3b82f6;" onclick="openAvatarSelector()">Select Cartoon Avatar</button>
             <input type="file" id="custom-avatar-input" accept="image/*" style="display: none;" onchange="uploadCustomAvatar(this)">
-            <button class="btn-primary" style="background: #9b5de5;" onclick="document.getElementById('custom-avatar-input').click()">Upload Custom Photo</button>
+            <button class="btn-primary" style="background: #6366f1;" onclick="document.getElementById('custom-avatar-input').click()">Upload Custom Photo</button>
             <button class="btn-primary" style="background: #ef4444;" onclick="deleteAvatar()">Delete Profile Photo</button>
             <button class="btn-primary" style="background: #334155; color: white; box-shadow: none;" onclick="closeAvatarOptions()">Cancel</button>
         </div>
@@ -196,7 +196,7 @@
 
     <!-- CARTOON AVATAR SELECTOR MODAL -->
     <div id="avatar-selector-modal" class="screen slide-right" style="background-color: rgba(0,0,0,0.9); z-index: 75; justify-content: center; align-items: center;">
-        <div style="background-color: #1a1a2e; padding: 20px; border-radius: 20px; width: 90%; max-height: 80vh; overflow-y: auto;">
+        <div style="background-color: #1e293b; padding: 20px; border-radius: 20px; width: 90%; max-height: 80vh; overflow-y: auto;">
             <h3 style="color: white; text-align: center; margin-bottom: 20px;">Choose an Avatar</h3>
             <div id="cartoon-avatar-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
                 <!-- Avatars injected here -->

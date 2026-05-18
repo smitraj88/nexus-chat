@@ -32,7 +32,7 @@ class LoginSignupWindow(QWidget):
         self.anim.setEasingCurve(QEasingCurve.InOutQuad)
         self.anim.start()
 
-    def apply_glow(self, widget, color="#ec4899", blur_radius=25):
+    def apply_glow(self, widget, color="#6366f1", blur_radius=25):
         glow = QGraphicsDropShadowEffect(widget)
         glow.setBlurRadius(blur_radius)
         glow.setColor(QColor(color))
@@ -75,7 +75,7 @@ class LoginSignupWindow(QWidget):
         
         btn_login = QPushButton("LOGIN")
         btn_login.clicked.connect(self.handle_login)
-        self.apply_glow(btn_login, "#ec4899", 20)
+        self.apply_glow(btn_login, "#6366f1", 20)
         
         btn_switch = QPushButton("Don't have an account? Sign Up")
         btn_switch.setObjectName("icon_button")
@@ -110,7 +110,7 @@ class LoginSignupWindow(QWidget):
         
         btn_signup = QPushButton("SIGN UP")
         btn_signup.clicked.connect(self.handle_signup)
-        self.apply_glow(btn_signup, "#ec4899", 20)
+        self.apply_glow(btn_signup, "#6366f1", 20)
         
         btn_switch = QPushButton("Already have an account? Log In")
         btn_switch.setObjectName("icon_button")

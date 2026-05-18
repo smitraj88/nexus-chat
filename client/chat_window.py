@@ -68,7 +68,7 @@ class ChatWindow(QWidget):
         self.anim.setEasingCurve(QEasingCurve.InOutQuad)
         self.anim.start()
 
-    def apply_glow(self, widget, color="#ec4899", blur_radius=20):
+    def apply_glow(self, widget, color="#6366f1", blur_radius=20):
         glow = QGraphicsDropShadowEffect(widget)
         glow.setBlurRadius(blur_radius)
         glow.setColor(QColor(color))
@@ -158,7 +158,7 @@ class ChatWindow(QWidget):
         self.user_avatar.setPixmap(self.get_avatar_icon(url).pixmap(40, 40))
         
         self.user_profile = QLabel(self.username)
-        self.user_profile.setStyleSheet("font-weight: bold; font-size: 16px; color: #ec4899;")
+        self.user_profile.setStyleSheet("font-weight: bold; font-size: 16px; color: #6366f1;")
         
         profile_layout.addWidget(self.user_avatar)
         profile_layout.addWidget(self.user_profile)
@@ -191,7 +191,7 @@ class ChatWindow(QWidget):
         
         self.add_contact_btn = QPushButton("Add Contact")
         self.add_contact_btn.setObjectName("icon_button")
-        self.add_contact_btn.setStyleSheet("color: #ec4899; font-size: 13px; text-align: left;")
+        self.add_contact_btn.setStyleSheet("color: #6366f1; font-size: 13px; text-align: left;")
         self.add_contact_btn.clicked.connect(self.add_contact)
         
         # Search Box
@@ -333,7 +333,7 @@ class ChatWindow(QWidget):
         self.send_btn = QPushButton("Send")
         self.send_btn.setFixedWidth(80)
         self.send_btn.clicked.connect(self.send_message)
-        self.apply_glow(self.send_btn, "#ec4899", 15)
+        self.apply_glow(self.send_btn, "#6366f1", 15)
         
         self.img_btn = QPushButton("📷")
         self.img_btn.setObjectName("icon_button")
@@ -435,7 +435,7 @@ class ChatWindow(QWidget):
         time_tag = f"<span style='color: #64748b; font-size: 11px; margin-left: 10px;'>{timestamp}</span>"
         
         if sender == self.username:
-            return f"<div style='text-align: right; color: #f472b6; font-size: 15px;'>{text} {time_tag} <b>:You</b> {img_tag}</div>"
+            return f"<div style='text-align: right; color: #818cf8; font-size: 15px;'>{text} {time_tag} <b>:You</b> {img_tag}</div>"
         else:
             return f"<div style='text-align: left; color: #e2e8f0; font-size: 15px;'>{img_tag} <b>{sender}:</b> {text} {time_tag}</div>"
 
@@ -544,7 +544,7 @@ class ChatWindow(QWidget):
         unread_lbl = QLabel("")
         unread_lbl.setFixedSize(20, 20)
         unread_lbl.setAlignment(Qt.AlignCenter)
-        unread_lbl.setStyleSheet("background-color: #ec4899; color: white; border-radius: 10px; font-size: 11px; font-weight: bold;")
+        unread_lbl.setStyleSheet("background-color: #4f46e5; color: white; border-radius: 10px; font-size: 11px; font-weight: bold;")
         count = self.unread_counts.get(contact_name, 0)
         if count > 0:
             unread_lbl.setText(str(count))
@@ -715,9 +715,9 @@ class ChatWindow(QWidget):
         # Add "Your Story" button
         add_story_btn = QPushButton("+")
         add_story_btn.setFixedSize(60, 60)
-        add_story_btn.setStyleSheet("border-radius: 30px; background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #4f46e5, stop:1 #ec4899); font-size: 20px; font-weight: bold; border: none;")
+        add_story_btn.setStyleSheet("border-radius: 30px; background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #4f46e5, stop:1 #6366f1); font-size: 20px; font-weight: bold; border: none;")
         add_story_btn.clicked.connect(self.upload_story)
-        self.apply_glow(add_story_btn, "#ec4899", 15)
+        self.apply_glow(add_story_btn, "#6366f1", 15)
         self.stories_layout.addWidget(add_story_btn)
 
         try:
@@ -728,9 +728,9 @@ class ChatWindow(QWidget):
                 lbl = QLabel(s['username'][0].upper())
                 lbl.setFixedSize(60, 60)
                 lbl.setAlignment(Qt.AlignCenter)
-                lbl.setStyleSheet("border-radius: 30px; border: 2px solid #ec4899; background-color: #1e293b; font-weight: bold; color: white;")
+                lbl.setStyleSheet("border-radius: 30px; border: 2px solid #6366f1; background-color: #1e293b; font-weight: bold; color: white;")
                 lbl.setToolTip(f"{s['username']} at {s['time']}")
-                self.apply_glow(lbl, "#ec4899", 10)
+                self.apply_glow(lbl, "#6366f1", 10)
                 self.stories_layout.addWidget(lbl)
 
         except:

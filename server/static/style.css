@@ -7,8 +7,8 @@
 }
 
 body {
-    background-color: #0b0c10;
-    color: white;
+    background-color: #0f172a;
+    color: #f8fafc;
     overflow: hidden; /* For mobile PWA app feel */
 }
 
@@ -18,15 +18,7 @@ body {
     top: 0; left: 0; right: 0; bottom: 0;
     pointer-events: none;
     z-index: 9999;
-    box-shadow: inset 0 0 10px rgba(155, 93, 229, 0.3);
-    animation: rgbEdgePulse 4s infinite linear;
-}
-
-@keyframes rgbEdgePulse {
-    0% { box-shadow: inset 0 0 10px rgba(155, 93, 229, 0.3); }
-    33% { box-shadow: inset 0 0 15px rgba(241, 91, 181, 0.4); }
-    66% { box-shadow: inset 0 0 12px rgba(59, 130, 246, 0.3); }
-    100% { box-shadow: inset 0 0 10px rgba(155, 93, 229, 0.3); }
+    box-shadow: inset 0 0 8px rgba(99, 102, 241, 0.15);
 }
 
 .screen {
@@ -34,7 +26,7 @@ body {
     top: 0; left: 0; right: 0; bottom: 0;
     display: flex;
     flex-direction: column;
-    background-color: #0b0c10;
+    background-color: #0f172a;
     transition: transform 0.3s ease-in-out;
     transform: translateX(100%);
     z-index: 10;
@@ -73,19 +65,19 @@ body {
 
 .purple-bubble {
     width: 60px; height: 60px;
-    background: #9b5de5;
+    background: #4f46e5;
     border-radius: 30px;
     border-bottom-left-radius: 5px;
     font-size: 30px;
     left: 10px; top: 0;
-    box-shadow: 0 0 20px rgba(155, 93, 229, 0.6);
+    box-shadow: 0 0 20px rgba(79, 70, 229, 0.4);
     animation: float1 1s ease-in-out infinite;
 }
 
 .dark-bubble {
     width: 50px; height: 50px;
     background: #1e293b;
-    border: 2px solid #9b5de5;
+    border: 2px solid #4f46e5;
     border-radius: 25px;
     border-bottom-right-radius: 5px;
     font-size: 25px;
@@ -141,13 +133,7 @@ body {
 
 /* Background floating bubbles */
 .bg-bubbles {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    overflow: hidden;
-    z-index: -1;
-    pointer-events: none;
-    opacity: 0.35;
-    filter: drop-shadow(0 0 20px rgba(155, 93, 229, 0.8));
+    display: none;
 }
 
 .bg-b1 { top: 15%; left: -20px; animation: float1 3s ease-in-out infinite, slowDrift1 15s linear infinite alternate; }
@@ -191,8 +177,8 @@ body {
     50% { transform: scale(1.05); text-shadow: 0 0 15px rgba(155, 93, 229, 0.5); }
 }
 
-.nexus { color: white; }
-.chat { color: #9b5de5; }
+.nexus { color: #f8fafc; }
+.chat { color: #6366f1; }
 
 /* --- LOGIN FORM --- */
 .form-container {
@@ -203,9 +189,9 @@ body {
 }
 
 input {
-    background-color: #1a1a2e;
+    background-color: #1e293b;
     border: 1px solid #334155;
-    color: white;
+    color: #f8fafc;
     padding: 15px 20px;
     border-radius: 25px;
     font-size: 16px;
@@ -214,12 +200,12 @@ input {
 }
 
 input:focus {
-    border-color: #9b5de5;
-    box-shadow: 0 0 10px rgba(155, 93, 229, 0.3);
+    border-color: #6366f1;
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.2);
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #9b5de5, #f15bb5, #9b5de5);
+    background: linear-gradient(135deg, #4f46e5, #6366f1, #4f46e5);
     background-size: 200% 200%;
     animation: gradientShift 2s ease infinite;
     color: white;
@@ -228,14 +214,14 @@ input:focus {
     border-radius: 25px;
     font-size: 18px;
     font-weight: 600;
-    box-shadow: 0 0 20px rgba(155, 93, 229, 0.5);
+    box-shadow: 0 0 20px rgba(79, 70, 229, 0.3);
     cursor: pointer;
     margin-top: 10px;
     transition: transform 0.2s, box-shadow 0.2s;
 }
 .btn-primary:active {
     transform: scale(0.95);
-    box-shadow: 0 0 10px rgba(155, 93, 229, 0.8);
+    box-shadow: 0 0 10px rgba(79, 70, 229, 0.6);
 }
 
 /* --- HEADER --- */
@@ -244,14 +230,14 @@ input:focus {
     justify-content: space-between;
     align-items: center;
     padding: 15px 20px;
-    background-color: #0b0c10;
+    background-color: #0f172a;
 }
 
 .header-title {
     font-size: 20px;
     font-weight: 900;
 }
-.header-title span { color: #9b5de5; }
+.header-title span { color: #6366f1; }
 
 .icon-btn {
     background: transparent;
@@ -269,7 +255,7 @@ input:focus {
 .search-input-wrapper {
     display: flex;
     align-items: center;
-    background-color: #1a1a2e;
+    background-color: #1e293b;
     border-radius: 20px;
     padding: 0 15px;
 }
@@ -292,13 +278,13 @@ input:focus {
     display: flex;
     align-items: center;
     padding: 15px 20px;
-    border-bottom: 1px solid #1a1a2e;
+    border-bottom: 1px solid #1e293b;
     cursor: pointer;
     transition: background-color 0.2s, transform 0.2s;
 }
 
 .chat-item:active {
-    background-color: #1a1a2e;
+    background-color: #1e293b;
     transform: scale(0.98);
 }
 
@@ -340,7 +326,7 @@ input:focus {
 }
 
 .unread-badge {
-    background-color: #9b5de5;
+    background-color: #4f46e5;
     color: white;
     font-size: 11px;
     font-weight: bold;
@@ -383,7 +369,7 @@ input:focus {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    background-color: #0b0c10;
+    background-color: #0f172a;
 }
 
 .msg {
@@ -396,15 +382,15 @@ input:focus {
 }
 
 .msg-in {
-    background-color: #1a1a2e;
-    color: white;
+    background-color: #1e293b;
+    color: #f8fafc;
     align-self: flex-start;
     border-bottom-left-radius: 5px;
     animation: popIn 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
 .msg-out {
-    background: linear-gradient(135deg, #9b5de5, #f15bb5, #9b5de5);
+    background: linear-gradient(135deg, #4f46e5, #6366f1, #4f46e5);
     background-size: 200% 200%;
     animation: gradientShift 2s ease infinite, popIn 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     color: white;
@@ -424,13 +410,13 @@ input:focus {
     display: flex;
     align-items: center;
     padding: 10px 15px;
-    background-color: #1a1a2e;
+    background-color: #1e293b;
     gap: 10px;
     padding-bottom: env(safe-area-inset-bottom, 15px); /* iPhone X safe area */
 }
 
 .chat-input-area input {
     flex-grow: 1;
-    background-color: #0b0c10;
+    background-color: #0f172a;
     padding: 12px 15px;
 }

@@ -21,12 +21,12 @@ function toggleAuthMode() {
         title.textContent = "Sign Up";
         btn.textContent = "Sign Up";
         emailInput.style.display = 'block';
-        toggleText.innerHTML = `Already have an account? <span style="color: #9b5de5; font-weight: bold;">Log in</span>`;
+        toggleText.innerHTML = `Already have an account? <span style="color: #6366f1; font-weight: bold;">Log in</span>`;
     } else {
         title.textContent = "Log In";
         btn.textContent = "Log In";
         emailInput.style.display = 'none';
-        toggleText.innerHTML = `Don't have an account? <span style="color: #9b5de5; font-weight: bold;">Sign up</span>`;
+        toggleText.innerHTML = `Don't have an account? <span style="color: #6366f1; font-weight: bold;">Sign up</span>`;
     }
 }
 
@@ -494,7 +494,7 @@ async function uploadDocument(input) {
 
 async function stopWavRecording() {
     isRecording = false;
-    document.getElementById('voice-btn').style.color = '#9b5de5';
+    document.getElementById('voice-btn').style.color = '#6366f1';
     document.getElementById('voice-btn').textContent = '🎤';
     
     processor.disconnect();
