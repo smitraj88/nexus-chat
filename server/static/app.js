@@ -110,7 +110,7 @@ async function renderContactItem(contact) {
             <div class="chat-message-preview">Tap to view chat...</div>
         </div>
         ${unread > 0 ? `<div class="unread-badge">${unread}</div>` : ''}
-        <button class="icon-btn" style="color: #94a3b8; font-size: 20px; padding: 0 10px;" onclick="event.stopPropagation(); openContactMenu('${contact}')">⋮</button>
+        <button class="icon-btn" style="color: #94a3b8; font-size: 28px; padding: 15px 25px; margin-right: -20px; cursor: pointer;" onclick="event.stopPropagation(); openContactMenu('${contact}')">⋮</button>
     `;
     
     // Insert at top
