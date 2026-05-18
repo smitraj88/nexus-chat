@@ -23,7 +23,7 @@ QListWidget::item {
 }
 
 QListWidget::item:selected {
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #4f46e5, stop:1 #6366f1);
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #1d4ed8, stop:1 #3b82f6);
     color: white;
     font-weight: bold;
 }
@@ -39,7 +39,7 @@ QTextEdit {
     border: none;
     padding: 20px;
     font-size: 15px;
-    selection-background-color: #4f46e5;
+    selection-background-color: #1d4ed8;
 }
 
 /* Input Area */
@@ -53,13 +53,13 @@ QLineEdit {
 }
 
 QLineEdit:focus {
-    border: 1px solid #6366f1;
+    border: 1px solid #3b82f6;
     background-color: #1e293b;
 }
 
 /* Primary Buttons */
 QPushButton {
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #4f46e5, stop:1 #6366f1);
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #1d4ed8, stop:1 #3b82f6);
     color: white;
     border-radius: 20px;
     padding: 12px 25px;
@@ -69,17 +69,17 @@ QPushButton {
 }
 
 QPushButton:hover {
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #6366f1, stop:1 #818cf8);
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #3b82f6, stop:1 #60a5fa);
 }
 
 QPushButton:pressed {
-    background: #4338ca;
+    background: #1e3a8a;
 }
 
 /* Icon Buttons */
 QPushButton#icon_button {
     background: transparent;
-    color: #6366f1;
+    color: #3b82f6;
     font-size: 22px;
     padding: 5px;
     border-radius: 20px;
@@ -87,7 +87,7 @@ QPushButton#icon_button {
 
 QPushButton#icon_button:hover {
     background-color: #334155;
-    color: #818cf8;
+    color: #60a5fa;
 }
 
 QPushButton#icon_button:pressed {

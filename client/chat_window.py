@@ -68,7 +68,7 @@ class ChatWindow(QWidget):
         self.anim.setEasingCurve(QEasingCurve.InOutQuad)
         self.anim.start()
 
-    def apply_glow(self, widget, color="#6366f1", blur_radius=20):
+    def apply_glow(self, widget, color="#2563eb", blur_radius=20):
         glow = QGraphicsDropShadowEffect(widget)
         glow.setBlurRadius(blur_radius)
         glow.setColor(QColor(color))
@@ -158,7 +158,7 @@ class ChatWindow(QWidget):
         self.user_avatar.setPixmap(self.get_avatar_icon(url).pixmap(40, 40))
         
         self.user_profile = QLabel(self.username)
-        self.user_profile.setStyleSheet("font-weight: bold; font-size: 16px; color: #6366f1;")
+        self.user_profile.setStyleSheet("font-weight: bold; font-size: 16px; color: #2563eb;")
         
         profile_layout.addWidget(self.user_avatar)
         profile_layout.addWidget(self.user_profile)
@@ -191,14 +191,14 @@ class ChatWindow(QWidget):
         
         self.add_contact_btn = QPushButton("Add Contact")
         self.add_contact_btn.setObjectName("icon_button")
-        self.add_contact_btn.setStyleSheet("color: #6366f1; font-size: 13px; text-align: left;")
+        self.add_contact_btn.setStyleSheet("color: #2563eb; font-size: 13px; text-align: left;")
         self.add_contact_btn.clicked.connect(self.add_contact)
         
         # Search Box
         self.search_input = QLineEdit()
         self.search_input.setPlaceholderText("🔍 Search contacts...")
         self.search_input.textChanged.connect(self.filter_contacts)
-        self.apply_glow(self.search_input, "#4f46e5", 10)
+        self.apply_glow(self.search_input, "#2563eb", 10)
 
         main_sidebar_layout.addLayout(profile_layout)
         main_sidebar_layout.addWidget(self.settings_btn)
@@ -225,27 +225,27 @@ class ChatWindow(QWidget):
         
         self.my_contacts_btn = QPushButton("My Contacts")
         self.my_contacts_btn.setObjectName("icon_button")
-        self.my_contacts_btn.setStyleSheet("color: #6366f1; font-size: 14px; text-align: left;")
+        self.my_contacts_btn.setStyleSheet("color: #1e40af; font-size: 14px; text-align: left;")
         self.my_contacts_btn.clicked.connect(lambda: QMessageBox.information(self, "My Contacts", f"You have {self.chat_list.count()} saved contacts."))
         
         self.change_avatar_btn = QPushButton("Change Profile Photo")
         self.change_avatar_btn.setObjectName("icon_button")
-        self.change_avatar_btn.setStyleSheet("color: #6366f1; font-size: 14px; text-align: left;")
+        self.change_avatar_btn.setStyleSheet("color: #2563eb; font-size: 14px; text-align: left;")
         self.change_avatar_btn.clicked.connect(self.change_avatar)
         
         self.blocked_btn = QPushButton("Blocked Contacts")
         self.blocked_btn.setObjectName("icon_button")
-        self.blocked_btn.setStyleSheet("color: #6366f1; font-size: 14px; text-align: left;")
+        self.blocked_btn.setStyleSheet("color: #3b82f6; font-size: 14px; text-align: left;")
         self.blocked_btn.clicked.connect(self.view_blocked_contacts)
         
         self.share_profile_btn = QPushButton("Share Profile / Invite Friends")
         self.share_profile_btn.setObjectName("icon_button")
-        self.share_profile_btn.setStyleSheet("color: #6366f1; font-size: 14px; text-align: left;")
+        self.share_profile_btn.setStyleSheet("color: #0ea5e9; font-size: 14px; text-align: left;")
         self.share_profile_btn.clicked.connect(self.share_profile)
         
         self.switch_account_btn = QPushButton("Sign Out")
         self.switch_account_btn.setObjectName("icon_button")
-        self.switch_account_btn.setStyleSheet("color: #94a3b8; font-size: 14px; text-align: left;")
+        self.switch_account_btn.setStyleSheet("color: #38bdf8; font-size: 14px; text-align: left;")
         self.switch_account_btn.clicked.connect(self.switch_account)
         
         settings_layout.addWidget(back_btn)
@@ -333,7 +333,7 @@ class ChatWindow(QWidget):
         self.send_btn = QPushButton("Send")
         self.send_btn.setFixedWidth(80)
         self.send_btn.clicked.connect(self.send_message)
-        self.apply_glow(self.send_btn, "#6366f1", 15)
+        self.apply_glow(self.send_btn, "#2563eb", 15)
         
         self.img_btn = QPushButton("📷")
         self.img_btn.setObjectName("icon_button")

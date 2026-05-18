@@ -29,7 +29,7 @@
             <input type="password" id="password" placeholder="Password">
             <button class="btn-primary" id="auth-btn" onclick="submitAuth()">Log In</button>
             <p style="text-align: center; color: #94a3b8; margin-top: 10px; cursor: pointer; font-size: 14px;" onclick="toggleAuthMode()">
-                Don't have an account? <span style="color: #6366f1; font-weight: bold;">Sign up</span>
+                Don't have an account? <span style="color: #3b82f6; font-weight: bold;">Sign up</span>
             </p>
         </div>
     </div>
@@ -48,8 +48,8 @@
         </div>
         <div class="header">
             <button class="icon-btn" onclick="openSettings()">☰</button>
-            <button class="header-title" style="background: transparent; border: none; color: #f8fafc; font-size: 20px; font-weight: 900;">Nexus <span style="color: #6366f1;">Chat</span></button>
-            <button class="icon-btn" style="color: #6366f1;" onclick="alert('Options coming soon!')">⋮</button>
+            <button class="header-title" style="background: transparent; border: none; color: #f8fafc; font-size: 20px; font-weight: 900;">Nexus <span style="color: #3b82f6;">Chat</span></button>
+            <button class="icon-btn" style="color: #3b82f6;" onclick="alert('Options coming soon!')">⋮</button>
         </div>
 
         <div class="search-bar">
@@ -60,7 +60,7 @@
         </div>
 
         <div style="padding: 0 20px 10px 20px;">
-            <button class="btn-primary" style="width: 100%; background: #6366f1; display: flex; justify-content: center; align-items: center; gap: 10px; box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);" onclick="addNewContact()">
+            <button class="btn-primary" style="width: 100%; background: #2563eb; display: flex; justify-content: center; align-items: center; gap: 10px; box-shadow: 0 0 15px rgba(37, 99, 235, 0.3);" onclick="addNewContact()">
                 <span style="font-size: 18px;">➕</span> Add New Contact
             </button>
         </div>
@@ -100,11 +100,11 @@
 
         <div class="chat-input-area">
             <input type="file" id="document-input" style="display: none;" onchange="uploadDocument(this)">
-            <button class="icon-btn" style="color: #6366f1;" onclick="document.getElementById('document-input').click()">📎</button>
-            <button class="icon-btn" style="color: #6366f1;" onclick="openLiveCamera()">📷</button>
-            <button class="icon-btn" id="voice-btn" style="color: #6366f1;" onclick="toggleRecording()">🎤</button>
+            <button class="icon-btn" style="color: #3b82f6;" onclick="document.getElementById('document-input').click()">📎</button>
+            <button class="icon-btn" style="color: #3b82f6;" onclick="openLiveCamera()">📷</button>
+            <button class="icon-btn" id="voice-btn" style="color: #3b82f6;" onclick="toggleRecording()">🎤</button>
             <input type="text" id="msg-input" placeholder="Message..." onkeypress="if(event.key === 'Enter') sendMessage()">
-            <button class="icon-btn" style="color: #6366f1;" onclick="sendMessage()">➤</button>
+            <button class="icon-btn" style="color: #3b82f6;" onclick="sendMessage()">➤</button>
         </div>
     </div>
 
@@ -120,11 +120,11 @@
                 <img id="my-avatar" src="" style="width: 100px; height: 100px; border-radius: 50px; background-color: #1e293b; margin-bottom: 15px; object-fit: cover;">
                 <h2 id="my-name" style="color: white; font-weight: 900;"></h2>
             </div>
-            <button class="btn-primary" style="width: 100%; background: #4f46e5; box-shadow: 0 0 20px rgba(79,70,229,0.3);" onclick="closeSettings(); loadContacts()">My Contacts</button>
-            <button class="btn-primary" style="width: 100%; background: #4f46e5; box-shadow: 0 0 20px rgba(79,70,229,0.3);" onclick="openAvatarOptions()">Change Profile Photo</button>
-            <button class="btn-primary" style="width: 100%; background: #4f46e5; box-shadow: 0 0 20px rgba(79,70,229,0.3);" onclick="viewBlocked()">Blocked Contacts</button>
-            <button class="btn-primary" style="width: 100%; background: #6366f1; box-shadow: 0 0 20px rgba(99,102,241,0.3);" onclick="shareProfile()">Share Profile / Invite Friends</button>
-            <button class="btn-primary" style="width: 100%; background: #334155; color: #f8fafc; box-shadow: none;" onclick="logout()">Sign Out</button>
+            <button class="btn-primary" style="width: 100%; background: #1e40af; box-shadow: 0 0 20px rgba(30,64,175,0.4);" onclick="closeSettings(); loadContacts()">My Contacts</button>
+            <button class="btn-primary" style="width: 100%; background: #2563eb; box-shadow: 0 0 20px rgba(37,99,235,0.4);" onclick="openAvatarOptions()">Change Profile Photo</button>
+            <button class="btn-primary" style="width: 100%; background: #3b82f6; box-shadow: 0 0 20px rgba(59,130,246,0.4);" onclick="viewBlocked()">Blocked Contacts</button>
+            <button class="btn-primary" style="width: 100%; background: #0ea5e9; box-shadow: 0 0 20px rgba(14,165,233,0.4);" onclick="shareProfile()">Share Profile / Invite Friends</button>
+            <button class="btn-primary" style="width: 100%; background: #1e293b; color: #38bdf8; border: 1px solid #2563eb; box-shadow: none;" onclick="logout()">Sign Out</button>
         </div>
     </div>
 
@@ -132,7 +132,7 @@
     <div id="contact-menu-modal" class="screen slide-right" style="background-color: rgba(0,0,0,0.7); z-index: 30; justify-content: flex-end; transition: opacity 0.3s;">
         <div style="background-color: #1e293b; padding: 20px; border-top-left-radius: 20px; border-top-right-radius: 20px; display: flex; flex-direction: column; gap: 15px;">
             <h3 id="contact-menu-name" style="text-align: center; margin-bottom: 10px; color: white;"></h3>
-            <button class="btn-primary" style="background: #4f46e5;" onclick="editContact()">Edit Contact</button>
+            <button class="btn-primary" style="background: #2563eb;" onclick="editContact()">Edit Contact</button>
             <button class="btn-primary" style="background: #334155;" onclick="blockContact()">Block User</button>
             <button class="btn-primary" style="background: #be123c;" onclick="deleteContact()">Delete Contact</button>
             <button class="btn-primary" style="background: #334155; color: white; box-shadow: none;" onclick="closeContactMenu()">Cancel</button>
@@ -146,7 +146,7 @@
             <div id="preview-content" style="display: flex; justify-content: center;"></div>
             <div style="display: flex; gap: 10px;">
                 <button class="btn-primary" style="flex: 1; background: #334155;" onclick="cancelPreview()">Discard</button>
-                <button class="btn-primary" style="flex: 1; background: #6366f1;" onclick="sendPreview()">Send</button>
+                <button class="btn-primary" style="flex: 1; background: #2563eb;" onclick="sendPreview()">Send</button>
             </div>
         </div>
     </div>
@@ -154,7 +154,7 @@
     <!-- MESSAGE ACTION MODAL -->
     <div id="msg-action-modal" class="screen slide-right" style="background-color: rgba(0,0,0,0.7); z-index: 40; justify-content: flex-end;">
         <div style="background-color: #1e293b; padding: 20px; border-top-left-radius: 20px; border-top-right-radius: 20px; display: flex; flex-direction: column; gap: 15px;">
-            <button class="btn-primary" id="msg-edit-btn" style="background: #4f46e5;" onclick="editMessage()">Edit Message</button>
+            <button class="btn-primary" id="msg-edit-btn" style="background: #2563eb;" onclick="editMessage()">Edit Message</button>
             <button class="btn-primary" style="background: #334155;" onclick="deleteMessage(false)">Delete for Me</button>
             <button class="btn-primary" style="background: #be123c;" onclick="deleteMessage(true)">Delete for Everyone</button>
             <button class="btn-primary" style="background: #334155; color: white; box-shadow: none;" onclick="closeMsgAction()">Cancel</button>
@@ -178,7 +178,7 @@
             <div style="position: relative; width: 100%; aspect-ratio: 3/4; background: #000; border-radius: 20px; overflow: hidden;">
                 <video id="live-video" autoplay playsinline style="width: 100%; height: 100%; object-fit: cover;"></video>
             </div>
-            <button class="btn-primary" style="background: #6366f1; padding: 20px; border-radius: 50px; width: 80px; height: 80px; align-self: center; margin-top: 20px; border: 4px solid white; box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);" onclick="captureLivePhoto()"></button>
+            <button class="btn-primary" style="background: #2563eb; padding: 20px; border-radius: 50px; width: 80px; height: 80px; align-self: center; margin-top: 20px; border: 4px solid white; box-shadow: 0 0 20px rgba(37, 99, 235, 0.5);" onclick="captureLivePhoto()"></button>
         </div>
         <canvas id="camera-canvas" style="display: none;"></canvas>
     </div>
@@ -186,9 +186,9 @@
     <!-- AVATAR OPTIONS MODAL -->
     <div id="avatar-options-modal" class="screen slide-right" style="background-color: rgba(0,0,0,0.8); z-index: 70; justify-content: flex-end;">
         <div style="background-color: #1e293b; padding: 20px; border-top-left-radius: 20px; border-top-right-radius: 20px; display: flex; flex-direction: column; gap: 15px;">
-            <button class="btn-primary" style="background: #4f46e5;" onclick="openAvatarSelector()">Select Cartoon Avatar</button>
+            <button class="btn-primary" style="background: #2563eb;" onclick="openAvatarSelector()">Select Cartoon Avatar</button>
             <input type="file" id="custom-avatar-input" accept="image/*" style="display: none;" onchange="uploadCustomAvatar(this)">
-            <button class="btn-primary" style="background: #6366f1;" onclick="document.getElementById('custom-avatar-input').click()">Upload Custom Photo</button>
+            <button class="btn-primary" style="background: #3b82f6;" onclick="document.getElementById('custom-avatar-input').click()">Upload Custom Photo</button>
             <button class="btn-primary" style="background: #334155; color: #f8fafc;" onclick="deleteAvatar()">Delete Profile Photo</button>
             <button class="btn-primary" style="background: #334155; color: white; box-shadow: none;" onclick="closeAvatarOptions()">Cancel</button>
         </div>
