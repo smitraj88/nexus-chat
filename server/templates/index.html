@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Nexus Chat</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <!-- LOGIN SCREEN -->
+    <div id="login-screen" class="screen active">
+        <div class="animated-logo">
+            <div class="bubbles-container">
+                <div class="bubble purple-bubble">😊</div>
+                <div class="bubble dark-bubble">😉</div>
+            </div>
+            <div class="logo-text">
+                <span class="nexus">Nexus</span> <span class="chat">Chat</span>
+            </div>
+        </div>
+        
+        <div class="form-container" id="login-form-container">
+            <h2 id="auth-title" style="text-align: center; color: white;">Log In</h2>
+            <input type="text" id="username" placeholder="Enter Username">
+            <input type="email" id="email" placeholder="Email Address" style="display: none;">
+            <input type="password" id="password" placeholder="Password">
+            <button class="btn-primary" id="auth-btn" onclick="submitAuth()">Log In</button>
+            <p style="text-align: center; color: #94a3b8; margin-top: 10px; cursor: pointer; font-size: 14px;" onclick="toggleAuthMode()">
+                Don't have an account? <span style="color: #9b5de5; font-weight: bold;">Sign up</span>
+            </p>
+        </div>
+    </div>
+
+    <!-- MAIN APP SCREEN -->
+    <div id="app-screen" class="screen">
+        <div class="bg-bubbles">
+            <div class="bubble purple-bubble bg-b1">😊</div>
+            <div class="bubble dark-bubble bg-b2">😉</div>
+            <div class="bubble purple-bubble bg-b3">✨</div>
+            <div class="bubble dark-bubble bg-b4">🚀</div>
+            <div class="bubble pink-bubble bg-b5">💖</div>
+            <div class="bubble blue-bubble bg-b6">💧</div>
+            <div class="bubble green-bubble bg-b7">🍀</div>
+            <div class="bubble orange-bubble bg-b8">🔥</div>
+        </div>
+        <div class="header">
+            <button class="icon-btn" onclick="openSettings()">☰</button>
+            <div class="header-title">Nexus <span>Chat</span></div>
+            <button class="icon-btn" onclick="alert('Options coming soon!')">⋮</button>
+        </div>
+
+        <div class="search-bar">
+            <div class="search-input-wrapper">
+                <span>🔍</span>
+                <input type="text" placeholder="Search">
+            </div>
+        </div>
+
+        <div class="chat-list" id="chat-list">
+            <!-- Chat items injected here -->
+        </div>
+    </div>
+
+    <!-- CHAT VIEW SCREEN -->
+    <div id="chat-view" class="screen slide-right">
+        <div class="bg-bubbles">
+            <div class="bubble purple-bubble bg-b1">😊</div>
+            <div class="bubble dark-bubble bg-b2">😉</div>
+            <div class="bubble purple-bubble bg-b3">✨</div>
+            <div class="bubble dark-bubble bg-b4">🚀</div>
+            <div class="bubble pink-bubble bg-b5">💖</div>
+            <div class="bubble blue-bubble bg-b6">💧</div>
+            <div class="bubble green-bubble bg-b7">🍀</div>
+            <div class="bubble orange-bubble bg-b8">🔥</div>
+        </div>
+        <div class="header">
+            <button class="icon-btn" onclick="closeChat()">←</button>
+            <div class="chat-header-info" onclick="viewProfile(currentFriend)">
+                <img src="" alt="Avatar" id="chat-avatar" class="avatar-small">
+                <div class="chat-header-text">
+                    <div id="chat-name" style="font-weight: 600;">Contact</div>
+                    <div id="chat-status" style="font-size: 12px; color: #10b981;">Online</div>
+                </div>
+            </div>
+            <button class="icon-btn" onclick="alert('Calling ' + currentFriend + '...')">📞</button>
+        </div>
+
+        <div class="chat-messages" id="chat-messages">
+            <!-- Messages injected here -->
+        </div>
+
+        <div class="chat-input-area">
+            <input type="file" id="document-input" style="display: none;" onchange="uploadDocument(this)">
+            <button class="icon-btn" style="color: #9b5de5;" onclick="document.getElementById('document-input').click()">📎</button>
+            <button class="icon-btn" style="color: #9b5de5;" onclick="openLiveCamera()">📷</button>
+            <button class="icon-btn" id="voice-btn" style="color: #9b5de5;" onclick="toggleRecording()">🎤</button>
+            <input type="text" id="msg-input" placeholder="Message..." onkeypress="if(event.key === 'Enter') sendMessage()">
+            <button class="icon-btn" style="color: #9b5de5;" onclick="sendMessage()">➤</button>
+        </div>
+    </div>
+
+    <!-- SETTINGS MODAL -->
+    <div id="settings-modal" class="screen slide-right" style="background-color: #0f172a; z-index: 20;">
+        <div class="header">
+            <button class="icon-btn" onclick="closeSettings()">←</button>
+            <div class="header-title">Settings</div>
+            <div style="width: 22px;"></div>
+        </div>
+        <div style="padding: 30px; display: flex; flex-direction: column; gap: 20px;">
+            <div style="text-align: center;">
+                <img id="my-avatar" src="" style="width: 100px; height: 100px; border-radius: 50px; background-color: #1e293b; margin-bottom: 15px; object-fit: cover;">
+                <h2 id="my-name" style="color: white; font-weight: 900;"></h2>
+            </div>
+            <button class="btn-primary" style="width: 100%; background: #3b82f6; box-shadow: 0 0 20px rgba(59,130,246,0.5);" onclick="closeSettings(); loadContacts()">My Contacts</button>
+            <button class="btn-primary" style="width: 100%; background: #10b981; box-shadow: 0 0 20px rgba(16,185,129,0.5);" onclick="openAvatarOptions()">Change Profile Photo</button>
+            <button class="btn-primary" style="width: 100%; background: #f59e0b; box-shadow: 0 0 20px rgba(245,158,11,0.5);" onclick="viewBlocked()">Blocked Contacts</button>
+            <button class="btn-primary" style="width: 100%; background: #ef4444; box-shadow: 0 0 20px rgba(239,68,68,0.5);" onclick="logout()">Sign Out</button>
+        </div>
+    </div>
+
+    <!-- CONTACT MENU MODAL -->
+    <div id="contact-menu-modal" class="screen slide-right" style="background-color: rgba(0,0,0,0.7); z-index: 30; justify-content: flex-end; transition: opacity 0.3s;">
+        <div style="background-color: #1a1a2e; padding: 20px; border-top-left-radius: 20px; border-top-right-radius: 20px; display: flex; flex-direction: column; gap: 15px;">
+            <h3 id="contact-menu-name" style="text-align: center; margin-bottom: 10px; color: white;"></h3>
+            <button class="btn-primary" style="background: #3b82f6;" onclick="editContact()">Edit Contact</button>
+            <button class="btn-primary" style="background: #f59e0b;" onclick="blockContact()">Block User</button>
+            <button class="btn-primary" style="background: #ef4444;" onclick="deleteContact()">Delete Contact</button>
+            <button class="btn-primary" style="background: #334155; color: white; box-shadow: none;" onclick="closeContactMenu()">Cancel</button>
+        </div>
+    </div>
+
+    <!-- PREVIEW MODAL -->
+    <div id="preview-modal" class="screen slide-right" style="background-color: rgba(0,0,0,0.85); z-index: 50; justify-content: center; align-items: center;">
+        <div style="background-color: #1a1a2e; padding: 20px; border-radius: 20px; width: 90%; display: flex; flex-direction: column; gap: 15px;">
+            <h3 id="preview-title" style="text-align: center; color: white;">Preview</h3>
+            <div id="preview-content" style="display: flex; justify-content: center;"></div>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn-primary" style="flex: 1; background: #334155;" onclick="cancelPreview()">Discard</button>
+                <button class="btn-primary" style="flex: 1; background: #9b5de5;" onclick="sendPreview()">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MESSAGE ACTION MODAL -->
+    <div id="msg-action-modal" class="screen slide-right" style="background-color: rgba(0,0,0,0.7); z-index: 40; justify-content: flex-end;">
+        <div style="background-color: #1a1a2e; padding: 20px; border-top-left-radius: 20px; border-top-right-radius: 20px; display: flex; flex-direction: column; gap: 15px;">
+            <button class="btn-primary" id="msg-edit-btn" style="background: #3b82f6;" onclick="editMessage()">Edit Message</button>
+            <button class="btn-primary" style="background: #f59e0b;" onclick="deleteMessage(false)">Delete for Me</button>
+            <button class="btn-primary" style="background: #ef4444;" onclick="deleteMessage(true)">Delete for Everyone</button>
+            <button class="btn-primary" style="background: #334155; color: white; box-shadow: none;" onclick="closeMsgAction()">Cancel</button>
+        </div>
+    </div>
+
+    <!-- PROFILE VIEW MODAL -->
+    <div id="profile-modal" class="screen slide-right" style="background-color: rgba(0,0,0,0.9); z-index: 60; justify-content: center; align-items: center;" onclick="closeProfile()">
+        <img id="profile-view-img" src="" style="width: 250px; height: 250px; border-radius: 125px; margin-bottom: 20px; background-color: #1e293b; object-fit: cover;">
+        <h1 id="profile-view-name" style="color: white; font-weight: 900; font-size: 30px;"></h1>
+        <p style="color: #94a3b8; margin-top: 10px;">Tap anywhere to close</p>
+    </div>
+
+    <!-- LIVE CAMERA MODAL -->
+    <div id="camera-modal" class="screen slide-right" style="background-color: #0b0c10; z-index: 55; justify-content: center; align-items: center;">
+        <div style="width: 100%; max-width: 500px; padding: 20px; display: flex; flex-direction: column; gap: 15px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h3 style="color: white;">Take Photo</h3>
+                <button class="icon-btn" onclick="closeLiveCamera()">❌</button>
+            </div>
+            <div style="position: relative; width: 100%; aspect-ratio: 3/4; background: #000; border-radius: 20px; overflow: hidden;">
+                <video id="live-video" autoplay playsinline style="width: 100%; height: 100%; object-fit: cover;"></video>
+            </div>
+            <button class="btn-primary" style="background: #9b5de5; padding: 20px; border-radius: 50px; width: 80px; height: 80px; align-self: center; margin-top: 20px; border: 4px solid white; box-shadow: 0 0 20px rgba(155, 93, 229, 0.5);" onclick="captureLivePhoto()"></button>
+        </div>
+        <canvas id="camera-canvas" style="display: none;"></canvas>
+    </div>
+
+    <!-- AVATAR OPTIONS MODAL -->
+    <div id="avatar-options-modal" class="screen slide-right" style="background-color: rgba(0,0,0,0.8); z-index: 70; justify-content: flex-end;">
+        <div style="background-color: #1a1a2e; padding: 20px; border-top-left-radius: 20px; border-top-right-radius: 20px; display: flex; flex-direction: column; gap: 15px;">
+            <button class="btn-primary" style="background: #3b82f6;" onclick="openAvatarSelector()">Select Cartoon Avatar</button>
+            <input type="file" id="custom-avatar-input" accept="image/*" style="display: none;" onchange="uploadCustomAvatar(this)">
+            <button class="btn-primary" style="background: #9b5de5;" onclick="document.getElementById('custom-avatar-input').click()">Upload Custom Photo</button>
+            <button class="btn-primary" style="background: #ef4444;" onclick="deleteAvatar()">Delete Profile Photo</button>
+            <button class="btn-primary" style="background: #334155; color: white; box-shadow: none;" onclick="closeAvatarOptions()">Cancel</button>
+        </div>
+    </div>
+
+    <!-- CARTOON AVATAR SELECTOR MODAL -->
+    <div id="avatar-selector-modal" class="screen slide-right" style="background-color: rgba(0,0,0,0.9); z-index: 75; justify-content: center; align-items: center;">
+        <div style="background-color: #1a1a2e; padding: 20px; border-radius: 20px; width: 90%; max-height: 80vh; overflow-y: auto;">
+            <h3 style="color: white; text-align: center; margin-bottom: 20px;">Choose an Avatar</h3>
+            <div id="cartoon-avatar-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
+                <!-- Avatars injected here -->
+            </div>
+            <button class="btn-primary" style="background: #334155; color: white; margin-top: 20px;" onclick="closeAvatarSelector()">Cancel</button>
+        </div>
+    </div>
+
+    <!-- AMBIENT EDGE LIGHT -->
+    <div class="ambient-edge"></div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
