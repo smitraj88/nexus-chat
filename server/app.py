@@ -95,6 +95,11 @@ def handle_private_message(data):
     # Broadcast to room
     emit('private_message', data, room=room)
 
+    # Broadcast directly to friend's session ID if they are online to receive it
+    recipient_sid = online_users.get(friend)
+    if recipient_sid:
+        emit('private_message', data, room=recipient_sid)
+
     # AI Assistant Integration
     if friend == "AI Assistant":
         ai_reply = get_ai_response(message)
@@ -262,6 +267,23 @@ def send_message_rest():
         "read": False
     })
 
+    # Emit socket events for real-time updates to both room and private SID
+    socketio.emit('private_message', {
+        "user": username,
+        "friend": friend,
+        "message": message,
+        "timestamp": datetime.utcnow().strftime("%I:%M %p")
+    }, room=room)
+    
+    recipient_sid = online_users.get(friend)
+    if recipient_sid:
+        socketio.emit('private_message', {
+            "user": username,
+            "friend": friend,
+            "message": message,
+            "timestamp": datetime.utcnow().strftime("%I:%M %p")
+        }, room=recipient_sid)
+
     if friend == "AI Assistant":
         ai_reply = get_ai_response(message)
         messages_collection.insert_one({
@@ -273,19 +295,37 @@ def send_message_rest():
             "read": False
         })
         
+        socketio.emit('private_message', {
+            "user": "AI Assistant",
+            "friend": username,
+            "message": ai_reply,
+            "timestamp": datetime.utcnow().strftime("%I:%M %p")
+        }, room=room)
+        
     return jsonify({"success": True})
 
 
 @app.route('/contacts/<username>', methods=['GET'])
 def get_contacts(username):
     user_data = contacts_collection.find_one({"username": username})
+    contacts = []
     if user_data and "contacts" in user_data:
-        return jsonify({"contacts": user_data["contacts"]})
+        contacts = user_data["contacts"]
+    else:
+        # Default contacts for new users
+        contacts = ["AI Assistant", "Rahul", "Priya", "Aman", "Sarah"]
+        contacts_collection.insert_one({"username": username, "contacts": contacts})
     
-    # Default contacts for new users
-    default_contacts = ["AI Assistant", "Rahul", "Priya", "Aman", "Sarah"]
-    contacts_collection.insert_one({"username": username, "contacts": default_contacts})
-    return jsonify({"contacts": default_contacts})
+    # Also fetch all unique usernames who have sent messages to this user
+    messaged_us = messages_collection.distinct("user", {"friend": username})
+    
+    # Combine and preserve order/uniqueness (contacts first, then others)
+    combined = list(contacts)
+    for c in messaged_us:
+        if c not in combined and c != username:
+            combined.append(c)
+            
+    return jsonify({"contacts": combined})
 
 @app.route('/contacts', methods=['POST'])
 def add_contact():
