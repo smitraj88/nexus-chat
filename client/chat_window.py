@@ -186,7 +186,7 @@ class ChatWindow(QWidget):
         
         self.create_group_btn = QPushButton("Create Group")
         self.create_group_btn.setObjectName("icon_button")
-        self.create_group_btn.setStyleSheet("color: #3b82f6; font-size: 13px; text-align: left;")
+        self.create_group_btn.setStyleSheet("color: #6366f1; font-size: 13px; text-align: left;")
         self.create_group_btn.clicked.connect(self.create_group)
         
         self.add_contact_btn = QPushButton("Add Contact")
@@ -225,27 +225,27 @@ class ChatWindow(QWidget):
         
         self.my_contacts_btn = QPushButton("My Contacts")
         self.my_contacts_btn.setObjectName("icon_button")
-        self.my_contacts_btn.setStyleSheet("color: #3b82f6; font-size: 14px; text-align: left;")
+        self.my_contacts_btn.setStyleSheet("color: #6366f1; font-size: 14px; text-align: left;")
         self.my_contacts_btn.clicked.connect(lambda: QMessageBox.information(self, "My Contacts", f"You have {self.chat_list.count()} saved contacts."))
         
         self.change_avatar_btn = QPushButton("Change Profile Photo")
         self.change_avatar_btn.setObjectName("icon_button")
-        self.change_avatar_btn.setStyleSheet("color: #10b981; font-size: 14px; text-align: left;")
+        self.change_avatar_btn.setStyleSheet("color: #6366f1; font-size: 14px; text-align: left;")
         self.change_avatar_btn.clicked.connect(self.change_avatar)
         
         self.blocked_btn = QPushButton("Blocked Contacts")
         self.blocked_btn.setObjectName("icon_button")
-        self.blocked_btn.setStyleSheet("color: #f59e0b; font-size: 14px; text-align: left;")
+        self.blocked_btn.setStyleSheet("color: #6366f1; font-size: 14px; text-align: left;")
         self.blocked_btn.clicked.connect(self.view_blocked_contacts)
         
         self.share_profile_btn = QPushButton("Share Profile / Invite Friends")
         self.share_profile_btn.setObjectName("icon_button")
-        self.share_profile_btn.setStyleSheet("color: #a855f7; font-size: 14px; text-align: left;")
+        self.share_profile_btn.setStyleSheet("color: #6366f1; font-size: 14px; text-align: left;")
         self.share_profile_btn.clicked.connect(self.share_profile)
         
         self.switch_account_btn = QPushButton("Sign Out")
         self.switch_account_btn.setObjectName("icon_button")
-        self.switch_account_btn.setStyleSheet("color: #f43f5e; font-size: 14px; text-align: left;")
+        self.switch_account_btn.setStyleSheet("color: #94a3b8; font-size: 14px; text-align: left;")
         self.switch_account_btn.clicked.connect(self.switch_account)
         
         settings_layout.addWidget(back_btn)

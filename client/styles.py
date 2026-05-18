@@ -1,15 +1,15 @@
 STYLE_SHEET = """
 QWidget {
-    background-color: #0b0f19;
+    background-color: #0f172a;
     color: #e2e8f0;
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
 /* Sidebar */
 QListWidget {
-    background-color: #12182b;
+    background-color: #1e293b;
     border: none;
-    border-right: 1px solid #1e293b;
+    border-right: 1px solid #334155;
     outline: none;
     padding: 15px;
 }
@@ -29,13 +29,13 @@ QListWidget::item:selected {
 }
 
 QListWidget::item:hover:!selected {
-    background-color: #1e293b;
+    background-color: #334155;
     color: white;
 }
 
 /* Chat Area */
 QTextEdit {
-    background-color: #0b0f19;
+    background-color: #0f172a;
     border: none;
     padding: 20px;
     font-size: 15px;
@@ -44,7 +44,7 @@ QTextEdit {
 
 /* Input Area */
 QLineEdit {
-    background-color: #12182b;
+    background-color: #1e293b;
     border: 1px solid #334155;
     border-radius: 20px;
     padding: 12px 20px;
@@ -54,7 +54,7 @@ QLineEdit {
 
 QLineEdit:focus {
     border: 1px solid #6366f1;
-    background-color: #1a233a;
+    background-color: #1e293b;
 }
 
 /* Primary Buttons */
@@ -86,7 +86,7 @@ QPushButton#icon_button {
 }
 
 QPushButton#icon_button:hover {
-    background-color: #1e293b;
+    background-color: #334155;
     color: #818cf8;
 }
 
