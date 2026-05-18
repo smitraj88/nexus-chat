@@ -1,6 +1,11 @@
 import os
-from flask import Flask, request, send_from_directory, jsonify, render_template
+import sys
 
+base_dir = os.path.dirname(os.path.abspath(__file__))
+if base_dir not in sys.path:
+    sys.path.insert(0, base_dir)
+
+from flask import Flask, request, send_from_directory, jsonify, render_template
 
 from flask_socketio import SocketIO, emit, join_room
 from datetime import datetime, timedelta
@@ -9,7 +14,6 @@ from auth import register_routes
 from database import messages_collection, contacts_collection, users_collection, stories_collection
 from ai_service import get_ai_response
 
-base_dir = os.path.dirname(os.path.abspath(__file__))
 app = Flask(__name__, template_folder=os.path.join(base_dir, 'templates'), static_folder=os.path.join(base_dir, 'static'))
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'your_super_secret_key')
 
