@@ -6,15 +6,19 @@ from flask_socketio import SocketIO, emit, join_room
 from datetime import datetime, timedelta
 
 from auth import register_routes
-from database import messages_collection, contacts_collection, users_collection
+from database import messages_collection, contacts_collection, users_collection, stories_collection
 from ai_service import get_ai_response
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your_super_secret_key'
-app.config['UPLOAD_FOLDER'] = 'uploads'
+base_dir = os.path.dirname(os.path.abspath(__file__))
+app = Flask(__name__, template_folder=os.path.join(base_dir, 'templates'), static_folder=os.path.join(base_dir, 'static'))
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'your_super_secret_key')
 
-# Ensure upload directory exists
-os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+if os.environ.get('VERCEL') == '1':
+    app.config['UPLOAD_FOLDER'] = '/tmp'
+else:
+    app.config['UPLOAD_FOLDER'] = 'uploads'
+    os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+
 
 # Register Auth Routes
 register_routes(app)
