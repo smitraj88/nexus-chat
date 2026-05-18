@@ -52,12 +52,17 @@
             <button class="icon-btn" onclick="alert('Options coming soon!')">⋮</button>
         </div>
 
-        <div class="search-bar" style="display: flex; gap: 10px; align-items: center;">
-            <div class="search-input-wrapper" style="flex: 1;">
+        <div class="search-bar">
+            <div class="search-input-wrapper">
                 <span>🔍</span>
                 <input type="text" placeholder="Search">
             </div>
-            <button class="icon-btn" style="background: #9b5de5; color: white; width: 45px; height: 45px; border-radius: 22.5px; font-size: 24px; display: flex; justify-content: center; align-items: center; box-shadow: 0 0 15px rgba(155, 93, 229, 0.4);" onclick="addNewContact()">+</button>
+        </div>
+
+        <div style="padding: 0 20px 10px 20px;">
+            <button class="btn-primary" style="width: 100%; background: #9b5de5; display: flex; justify-content: center; align-items: center; gap: 10px; box-shadow: 0 0 15px rgba(155, 93, 229, 0.3);" onclick="addNewContact()">
+                <span style="font-size: 18px;">➕</span> Add New Contact
+            </button>
         </div>
 
         <div class="chat-list" id="chat-list">
