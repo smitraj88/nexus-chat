@@ -636,7 +636,7 @@ class ChatWindow(QWidget):
             QMessageBox.warning(self, "Error", f"Could not load blocked contacts: {e}")
 
     def share_profile(self):
-        invite_text = f"Hey! Let's chat on NexusChat. Add me using my username: {self.username}"
+        invite_text = f"Hey! Let's chat on NexusChat. Add me using my username: {self.username}\nJoin here: https://nexus-chat1.vercel.app"
         clipboard = QApplication.clipboard()
         clipboard.setText(invite_text)
         QMessageBox.information(self, "Share Profile", f"Profile invite copied to clipboard!\n\n{invite_text}\n\nShare this with your friends to connect!")

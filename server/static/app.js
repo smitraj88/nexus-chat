@@ -815,7 +815,7 @@ async function saveAvatar(url) {
 
 // === SHARE PROFILE ===
 function shareProfile() {
-    const inviteText = `Hey! Let's chat on NexusChat. Add me using my username: ${currentUser}`;
+    const inviteText = `Hey! Let's chat on NexusChat. Add me using my username: ${currentUser}\nJoin here: https://nexus-chat1.vercel.app`;
     if (navigator.clipboard && window.isSecureContext) {
         navigator.clipboard.writeText(inviteText).then(() => {
             alert(`Profile invite copied to clipboard!\n\n${inviteText}\n\nShare this with your friends to connect!`);
