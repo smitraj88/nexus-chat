@@ -1,5 +1,7 @@
 # NexusChat
 
+**Live Web App:** [https://nexus-chat1.vercel.app](https://nexus-chat1.vercel.app)
+
 NexusChat is a comprehensive AI-powered hybrid chat application. It provides real-time messaging, powerful media attachment capabilities, and a personalized user experience. Featuring both a Python-based client interface and a web/mobile server backend, NexusChat seamlessly integrates AI services to enhance communication.
 
 ## Features
