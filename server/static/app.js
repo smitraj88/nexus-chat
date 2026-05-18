@@ -812,3 +812,30 @@ async function saveAvatar(url) {
     // Refresh UI to show new avatar everywhere locally
     loadContacts(); 
 }
+
+// === SHARE PROFILE ===
+function shareProfile() {
+    const inviteText = `Hey! Let's chat on NexusChat. Add me using my username: ${currentUser}`;
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(inviteText).then(() => {
+            alert(`Profile invite copied to clipboard!\n\n${inviteText}\n\nShare this with your friends to connect!`);
+        }).catch(err => {
+            alert(`Failed to copy to clipboard: ${err}`);
+        });
+    } else {
+        // Fallback for older browsers or non-secure contexts
+        const textArea = document.createElement("textarea");
+        textArea.value = inviteText;
+        textArea.style.position = "fixed";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+            document.execCommand('copy');
+            alert(`Profile invite copied to clipboard!\n\n${inviteText}\n\nShare this with your friends to connect!`);
+        } catch (err) {
+            alert(`Failed to copy to clipboard: ${err}`);
+        }
+        document.body.removeChild(textArea);
+    }
+}

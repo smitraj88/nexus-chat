@@ -238,6 +238,11 @@ class ChatWindow(QWidget):
         self.blocked_btn.setStyleSheet("color: #f59e0b; font-size: 14px; text-align: left;")
         self.blocked_btn.clicked.connect(self.view_blocked_contacts)
         
+        self.share_profile_btn = QPushButton("Share Profile / Invite Friends")
+        self.share_profile_btn.setObjectName("icon_button")
+        self.share_profile_btn.setStyleSheet("color: #a855f7; font-size: 14px; text-align: left;")
+        self.share_profile_btn.clicked.connect(self.share_profile)
+        
         self.switch_account_btn = QPushButton("Sign Out")
         self.switch_account_btn.setObjectName("icon_button")
         self.switch_account_btn.setStyleSheet("color: #f43f5e; font-size: 14px; text-align: left;")
@@ -249,6 +254,7 @@ class ChatWindow(QWidget):
         settings_layout.addWidget(self.my_contacts_btn)
         settings_layout.addWidget(self.change_avatar_btn)
         settings_layout.addWidget(self.blocked_btn)
+        settings_layout.addWidget(self.share_profile_btn)
         settings_layout.addWidget(self.switch_account_btn)
         settings_layout.addStretch()
         
@@ -628,6 +634,12 @@ class ChatWindow(QWidget):
                 QMessageBox.information(self, "Success", f"User '{contact}' has been unblocked.")
         except Exception as e:
             QMessageBox.warning(self, "Error", f"Could not load blocked contacts: {e}")
+
+    def share_profile(self):
+        invite_text = f"Hey! Let's chat on NexusChat. Add me using my username: {self.username}"
+        clipboard = QApplication.clipboard()
+        clipboard.setText(invite_text)
+        QMessageBox.information(self, "Share Profile", f"Profile invite copied to clipboard!\n\n{invite_text}\n\nShare this with your friends to connect!")
 
     def change_avatar(self):
         path, _ = QFileDialog.getOpenFileName(self, "Select Profile Photo", "", "Images (*.png *.jpg *.jpeg)")
