@@ -23,9 +23,9 @@ def register_routes(app):
             if not username or not password or not email:
                 return jsonify({"message": "All fields are required"}), 400
 
-            # CHECK IF USER EXISTS
-            if users_collection.find_one({"username": username}):
-                return jsonify({"message": "Username already exists"}), 400
+            # CHECK IF USER EXISTS (Case-insensitive check for absolute uniqueness)
+            if users_collection.find_one({"username": {"$regex": f"^{username}$", "$options": "i"}}):
+                return jsonify({"message": "Username is already in use, please use another username"}), 400
 
             # HASH PASSWORD
             hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
