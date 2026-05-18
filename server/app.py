@@ -210,13 +210,71 @@ def get_private_messages():
     room = "_".join(sorted([user1, user2]))
     messages = []
     cursor = messages_collection.find({"room": room}).sort("timestamp", 1)
+    
+    tz_offset = timedelta(hours=5, minutes=30)
     for msg in cursor:
+        dt = msg.get('timestamp', datetime.utcnow()) + tz_offset
         messages.append({
             "user": msg['user'],
             "message": msg['message'],
-            "timestamp": msg.get('timestamp', datetime.utcnow()).strftime("%H:%M")
+            "timestamp": dt.strftime("%I:%M %p")
         })
     return jsonify({"messages": messages})
+
+@app.route('/unread_counts/<username>', methods=['GET'])
+def get_unread_counts(username):
+    pipeline = [
+        {"$match": {"friend": username, "read": False}},
+        {"$group": {"_id": "$user", "count": {"$sum": 1}}}
+    ]
+    cursor = messages_collection.aggregate(pipeline)
+    unread = {doc["_id"]: doc["count"] for doc in cursor}
+    return jsonify({"unread": unread})
+
+@app.route('/mark_read', methods=['POST'])
+def mark_read():
+    data = request.json
+    user = data.get('user')
+    friend = data.get('friend')
+    messages_collection.update_many(
+        {"user": friend, "friend": user, "read": False},
+        {"$set": {"read": True}}
+    )
+    return jsonify({"success": True})
+
+@app.route('/send_message', methods=['POST'])
+def send_message_rest():
+    data = request.json
+    username = data.get('user')
+    friend = data.get('friend')
+    message = data.get('message')
+    
+    if not username or not friend: return jsonify({"error": "missing"}), 400
+
+    room = "_".join(sorted([username, friend]))
+    
+    messages_collection.insert_one({
+        "user": username,
+        "friend": friend,
+        "message": message,
+        "room": room,
+        "timestamp": datetime.utcnow(),
+        "read": False
+    })
+
+    if friend == "AI Assistant":
+        ai_reply = get_ai_response(message)
+        messages_collection.insert_one({
+            "user": "AI Assistant",
+            "friend": username,
+            "message": ai_reply,
+            "room": room,
+            "timestamp": datetime.utcnow(),
+            "read": False
+        })
+        
+    return jsonify({"success": True})
+
 
 @app.route('/contacts/<username>', methods=['GET'])
 def get_contacts(username):

@@ -161,13 +161,19 @@ function closeChat() {
 }
 
 async function loadMessages() {
-    const chatBox = document.getElementById('chat-messages');
-    chatBox.innerHTML = '';
-    
     const res = await fetch(`/private_messages?user1=${currentUser}&user2=${currentFriend}`);
     const data = await res.json();
     
+    window.currentMessageCount = data.messages.length;
+    const chatBox = document.getElementById('chat-messages');
+    chatBox.innerHTML = '';
     data.messages.forEach(msg => appendMessage(msg.user, msg.message, msg.timestamp));
+    
+    fetch('/mark_read', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({user: currentUser, friend: currentFriend})
+    });
 }
 
 function appendMessage(sender, text, timestamp) {
@@ -639,16 +645,33 @@ async function viewBlocked() {
     }
 }
 
-function sendMessage() {
+async function sendMessage() {
     const input = document.getElementById('msg-input');
     const text = input.value.trim();
     if (!text) return;
     
-    socket.emit('private_message', {
-        user: currentUser,
-        friend: currentFriend,
-        message: text
-    });
+    // Optimistic UI update
+    const d = new Date();
+    let hours = d.getHours();
+    let ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+    let mins = d.getMinutes().toString().padStart(2, '0');
+    appendMessage(currentUser, text, `${hours}:${mins} ${ampm}`);
+    
+    try {
+        await fetch('/send_message', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                user: currentUser,
+                friend: currentFriend,
+                message: text
+            })
+        });
+    } catch(e) {
+        console.error("Failed to send:", e);
+    }
     
     input.value = '';
 }
@@ -672,6 +695,41 @@ socket.on('private_message', (data) => {
         renderContactItem(otherPerson);
     }
 });
+
+// === SERVERLESS POLLER ===
+setInterval(async () => {
+    if (!currentUser) return;
+
+    if (currentFriend && chatView.classList.contains('active')) {
+        const res = await fetch(`/private_messages?user1=${currentUser}&user2=${currentFriend}`);
+        const data = await res.json();
+        if (window.currentMessageCount !== data.messages.length) {
+            window.currentMessageCount = data.messages.length;
+            const chatBox = document.getElementById('chat-messages');
+            chatBox.innerHTML = '';
+            data.messages.forEach(msg => appendMessage(msg.user, msg.message, msg.timestamp));
+            
+            fetch('/mark_read', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({user: currentUser, friend: currentFriend})
+            });
+        }
+    }
+
+    if (appScreen.classList.contains('active')) {
+        const res2 = await fetch(`/unread_counts/${currentUser}`);
+        const data2 = await res2.json();
+        let changed = false;
+        for (let contact in data2.unread) {
+            if (unreadCounts[contact] !== data2.unread[contact]) {
+                unreadCounts[contact] = data2.unread[contact];
+                changed = true;
+            }
+        }
+        if (changed) loadContacts();
+    }
+}, 3000);
 
 // === AVATAR OPTIONS ===
 async function openAvatarOptions() {
