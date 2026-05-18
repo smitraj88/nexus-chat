@@ -545,6 +545,29 @@ async function toggleRecording() {
 }
 
 // === CONTACT ACTIONS ===
+async function addNewContact() {
+    const contactName = prompt("Enter the username of the person you want to add:");
+    if (!contactName || contactName.trim() === "") return;
+    
+    try {
+        const res = await fetch('/contacts', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({username: currentUser, contact: contactName.trim()})
+        });
+        
+        if (res.ok) {
+            loadContacts();
+            alert(contactName + " has been added to your contacts!");
+        } else {
+            const data = await res.json();
+            alert("Failed to add contact: " + (data.message || "Unknown error"));
+        }
+    } catch (e) {
+        alert("Error adding contact: " + e.message);
+    }
+}
+
 let menuContact = "";
 
 function openContactMenu(contact) {
